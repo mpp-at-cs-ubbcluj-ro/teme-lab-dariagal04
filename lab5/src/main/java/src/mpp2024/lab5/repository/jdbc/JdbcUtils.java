@@ -1,4 +1,7 @@
-package src.mpp2024;
+package src.mpp2024.lab5.repository.jdbc;
+
+
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +32,7 @@ public class JdbcUtils {
         logger.info("trying to connect to database ... {}",url);
         logger.info("user: {}",user);
         logger.info("pass: {}", pass);
-        Connection con = null;
+        Connection con=null;
         try {
 
             if (user!=null && pass!=null)
@@ -55,5 +58,15 @@ public class JdbcUtils {
         }
         logger.traceExit(instance);
         return instance;
+    }
+
+    public void closeConnection(){
+        if (instance!=null) {
+            try {
+                instance.close();
+            } catch (SQLException e) {
+                logger.error(e);
+            }
+        }
     }
 }
